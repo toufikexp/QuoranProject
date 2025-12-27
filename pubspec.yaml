@@ -1,0 +1,56 @@
+name: almushaf_elite
+description: Al-Mushaf Al-Elite - Your spiritual companion for the Holy Quran
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+  # State Management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
+  
+  # Localization
+  intl: ^0.20.2
+  
+  # Storage
+  shared_preferences: ^2.5.4
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  
+  # Network & Media
+  dio: ^5.9.0
+  cached_network_image: ^3.4.1
+  audio_service: ^0.18.18
+  just_audio: ^0.9.46
+  
+  # Utilities
+  hijri_date: ^1.0.0
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.2
+  build_runner: ^2.4.13
+  isar_generator: ^3.1.0+1
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icon/
+
+  # Internationalization
+  generate: true
+
