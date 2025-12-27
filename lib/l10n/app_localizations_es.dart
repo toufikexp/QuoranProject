@@ -224,4 +224,52 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sunday => 'Domingo';
+
+  @override
+  String get selectTranslationLanguage => 'Seleccionar idioma de traducción';
+
+  @override
+  String get choosePreferredLanguage =>
+      'Elige tu idioma preferido para las traducciones';
+
+  @override
+  String get selectDefaultReciter => 'Seleccionar recitador predeterminado';
+
+  @override
+  String get chooseFavoriteReciter => 'Elige tu recitador favorito';
+
+  @override
+  String get chooseTheme => 'Elegir tema';
+
+  @override
+  String get selectPreferredAppearance => 'Selecciona tu apariencia preferida';
+
+  @override
+  String get next => 'Siguiente';
+
+  @override
+  String get readingProgress => 'Progreso de lectura';
+
+  @override
+  String get today => 'Hoy';
+
+  @override
+  String get thisWeek => 'Esta semana';
+
+  @override
+  String get streak => 'Racha';
+
+  @override
+  String get bookmarkReminder => 'Recordatorio de marcador';
+
+  @override
+  String continueReadingSurah(String surah) {
+    return 'Continuar leyendo $surah';
+  }
+
+  @override
+  String get dailyVerseReady => 'Verso diario listo';
+
+  @override
+  String get basmala => 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
 }

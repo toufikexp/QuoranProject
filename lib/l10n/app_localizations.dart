@@ -509,6 +509,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sunday'**
   String get sunday;
+
+  /// No description provided for @selectTranslationLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Translation Language'**
+  String get selectTranslationLanguage;
+
+  /// No description provided for @choosePreferredLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred language for translations'**
+  String get choosePreferredLanguage;
+
+  /// No description provided for @selectDefaultReciter.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Default Reciter'**
+  String get selectDefaultReciter;
+
+  /// No description provided for @chooseFavoriteReciter.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your favorite reciter'**
+  String get chooseFavoriteReciter;
+
+  /// No description provided for @chooseTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Theme'**
+  String get chooseTheme;
+
+  /// No description provided for @selectPreferredAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Select your preferred appearance'**
+  String get selectPreferredAppearance;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @readingProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading Progress'**
+  String get readingProgress;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get thisWeek;
+
+  /// No description provided for @streak.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get streak;
+
+  /// No description provided for @bookmarkReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark reminder'**
+  String get bookmarkReminder;
+
+  /// No description provided for @continueReadingSurah.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue reading {surah}'**
+  String continueReadingSurah(String surah);
+
+  /// No description provided for @dailyVerseReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily verse ready'**
+  String get dailyVerseReady;
+
+  /// No description provided for @basmala.
+  ///
+  /// In en, this message translates to:
+  /// **'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'**
+  String get basmala;
 }
 
 class _AppLocalizationsDelegate

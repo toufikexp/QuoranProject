@@ -3,17 +3,58 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n/app_localizations.dart';
 import 'presentation/pages/onboarding_page.dart';
 import 'core/utils/onboarding_service.dart';
+import 'core/utils/locale_service.dart';
 import 'presentation/pages/home_dashboard_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = const Locale('en'); // Default locale
+  bool _isLoadingLocale = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocale();
+  }
+
+  Future<void> _loadLocale() async {
+    final savedLocale = await LocaleService.getSavedLocaleAsLocale();
+    if (mounted) {
+      setState(() {
+        _locale = savedLocale;
+        _isLoadingLocale = false;
+      });
+    }
+  }
+
+  void _updateLocale(Locale newLocale) {
+    setState(() {
+      _locale = newLocale;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_isLoadingLocale) {
+      return const MaterialApp(
+        home: Scaffold(
+          body: Center(
+          child: CircularProgressIndicator(),
+        ),
+        ),
+      );
+    }
+
     return MaterialApp(
       title: 'Al-Mushaf Al-Elite',
       debugShowCheckedModeBanner: false,
@@ -30,7 +71,7 @@ class MyApp extends StatelessWidget {
         Locale('fr'), // French
         Locale('es'), // Spanish
       ],
-      locale: const Locale('en'), // Default locale
+      locale: _locale,
       // Theme - Default to dark mode
       theme: ThemeData(
         primarySwatch: Colors.green,
@@ -46,13 +87,17 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark, // Default to dark mode
       // Check onboarding status and route accordingly
-      home: const AppInitializer(),
+      home: AppInitializer(
+        onLocaleChanged: _updateLocale,
+      ),
     );
   }
 }
 
 class AppInitializer extends StatefulWidget {
-  const AppInitializer({super.key});
+  final Function(Locale)? onLocaleChanged;
+
+  const AppInitializer({super.key, this.onLocaleChanged});
 
   @override
   State<AppInitializer> createState() => _AppInitializerState();
@@ -90,7 +135,9 @@ class _AppInitializerState extends State<AppInitializer> {
     // Show onboarding if not completed, otherwise show home dashboard
     return _isOnboardingCompleted
         ? const HomeDashboardPage()
-        : const OnboardingPage();
+        : OnboardingPage(
+            onLocaleChanged: widget.onLocaleChanged,
+          );
   }
 }
 

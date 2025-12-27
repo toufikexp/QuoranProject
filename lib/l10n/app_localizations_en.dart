@@ -224,4 +224,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sunday => 'Sunday';
+
+  @override
+  String get selectTranslationLanguage => 'Select Translation Language';
+
+  @override
+  String get choosePreferredLanguage =>
+      'Choose your preferred language for translations';
+
+  @override
+  String get selectDefaultReciter => 'Select Default Reciter';
+
+  @override
+  String get chooseFavoriteReciter => 'Choose your favorite reciter';
+
+  @override
+  String get chooseTheme => 'Choose Theme';
+
+  @override
+  String get selectPreferredAppearance => 'Select your preferred appearance';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get readingProgress => 'Reading Progress';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get thisWeek => 'This Week';
+
+  @override
+  String get streak => 'Streak';
+
+  @override
+  String get bookmarkReminder => 'Bookmark reminder';
+
+  @override
+  String continueReadingSurah(String surah) {
+    return 'Continue reading $surah';
+  }
+
+  @override
+  String get dailyVerseReady => 'Daily verse ready';
+
+  @override
+  String get basmala => 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
 }

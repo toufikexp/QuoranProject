@@ -228,9 +228,9 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
                         ),
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        'Al-Fatiha - Verse 7',
-                        style: TextStyle(
+                      Text(
+                        l10n.surahVerse('Al-Fatiha', 7),
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -291,9 +291,9 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
                 const SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.only(left: 10),
-                  child: const Text(
-                    'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-                    style: TextStyle(
+                  child: Text(
+                    l10n.basmala,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -313,7 +313,7 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Al-Fatiha 1:1',
+                  l10n.surahVerse('Al-Fatiha', 1),
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white.withOpacity(0.6),
@@ -340,7 +340,7 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
             Container(
               padding: const EdgeInsets.only(left: 20,top: 10),
               child: Text(
-                'Reading Progress',
+                l10n.readingProgress,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 18,
@@ -356,7 +356,7 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
                 children: [
                   Expanded(
                     child: _ProgressItem(
-                      label: 'Today',
+                      label: l10n.today,
                       value: '15 min',
                       icon: Icons.today,
                     ),
@@ -368,7 +368,7 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
                   ),
                   Expanded(
                     child: _ProgressItem(
-                      label: 'This Week',
+                      label: l10n.thisWeek,
                       value: '2h 30m',
                       icon: Icons.calendar_view_week,
                     ),
@@ -380,7 +380,7 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
                   ),
                   Expanded(
                     child: _ProgressItem(
-                      label: 'Streak',
+                      label: l10n.streak,
                       value: '7 days',
                       icon: Icons.local_fire_department,
                     ),
@@ -533,13 +533,13 @@ class _HomeDashboardPageState extends State<HomeDashboardPage>
           const SizedBox(height: 16),
           _NotificationItem(
             icon: Icons.bookmark,
-            title: 'Bookmark reminder',
-            subtitle: 'Continue reading Al-Baqarah',
+            title: l10n.bookmarkReminder,
+            subtitle: l10n.continueReadingSurah('Al-Baqarah'),
           ),
           const SizedBox(height: 12),
           _NotificationItem(
             icon: Icons.notifications_active,
-            title: 'Daily verse ready',
+            title: l10n.dailyVerseReady,
             subtitle: 'New verse of the day available',
           ),
         ],

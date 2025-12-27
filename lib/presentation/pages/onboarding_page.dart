@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../core/utils/onboarding_service.dart';
+import '../../core/utils/locale_service.dart';
 import '../../core/widgets/glassmorphism_card.dart';
 import '../../core/widgets/animated_gradient_background.dart';
 import '../../core/theme/app_colors.dart';
@@ -8,7 +9,9 @@ import '../../l10n/app_localizations.dart';
 import 'home_dashboard_page.dart';
 
 class OnboardingPage extends StatefulWidget {
-  const OnboardingPage({super.key});
+  final Function(Locale)? onLocaleChanged;
+  
+  const OnboardingPage({super.key, this.onLocaleChanged});
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -267,11 +270,12 @@ class _OnboardingPageState extends State<OnboardingPage>
   }
 
   Widget _buildLanguageSelection() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Select Translation Language',
+          l10n.selectTranslationLanguage,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -286,7 +290,7 @@ class _OnboardingPageState extends State<OnboardingPage>
         ),
         const SizedBox(height: 8),
         Text(
-          'Choose your preferred language for translations',
+          l10n.choosePreferredLanguage,
           style: TextStyle(
             fontSize: 14,
             color: Colors.white.withOpacity(0.7),
@@ -318,11 +322,18 @@ class _OnboardingPageState extends State<OnboardingPage>
                     );
                   },
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       HapticFeedback.lightImpact();
+                      final languageCode = language['code'] as String;
                       setState(() {
-                        _selectedLanguage = language['code'] as String;
+                        _selectedLanguage = languageCode;
                       });
+                      // Save locale immediately when selected
+                      await LocaleService.saveLocale(languageCode);
+                      // Notify parent to update locale
+                      if (widget.onLocaleChanged != null) {
+                        widget.onLocaleChanged!(Locale(languageCode));
+                      }
                       _updateContinueButton();
                     },
                     child: GlassmorphismCard(
@@ -360,11 +371,12 @@ class _OnboardingPageState extends State<OnboardingPage>
   }
 
   Widget _buildReciterSelection() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Select Default Reciter',
+          l10n.selectDefaultReciter,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -379,7 +391,7 @@ class _OnboardingPageState extends State<OnboardingPage>
         ),
         const SizedBox(height: 8),
         Text(
-          'Choose your favorite reciter',
+          l10n.chooseFavoriteReciter,
           style: TextStyle(
             fontSize: 14,
             color: Colors.white.withOpacity(0.7),
@@ -431,12 +443,13 @@ class _OnboardingPageState extends State<OnboardingPage>
   }
 
   Widget _buildThemeSelection() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Choose Theme',
+          l10n.chooseTheme,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -451,7 +464,7 @@ class _OnboardingPageState extends State<OnboardingPage>
         ),
         const SizedBox(height: 8),
         Text(
-          'Select your preferred appearance',
+          l10n.selectPreferredAppearance,
           style: TextStyle(
             fontSize: 14,
             color: Colors.white.withOpacity(0.7),
@@ -463,37 +476,42 @@ class _OnboardingPageState extends State<OnboardingPage>
             width: 200,
             height: 110,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: _ThemeOption(
-                    icon: Icons.light_mode,
-                    label: 'Light',
-                    isSelected: !_isDarkMode,
-                    onTap: () {
-                      HapticFeedback.lightImpact();
-                      setState(() {
-                        _isDarkMode = false;
-                      });
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: _ThemeOption(
-                    icon: Icons.dark_mode,
-                    label: 'Dark',
-                    isSelected: _isDarkMode,
-                    onTap: () {
-                      HapticFeedback.lightImpact();
-                      setState(() {
-                        _isDarkMode = true;
-                      });
-                    },
-                  ),
-                ),
-              ],
+            child: Builder(
+              builder: (context) {
+                final l10n = AppLocalizations.of(context)!;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: _ThemeOption(
+                        icon: Icons.light_mode,
+                        label: l10n.light,
+                        isSelected: !_isDarkMode,
+                        onTap: () {
+                          HapticFeedback.lightImpact();
+                          setState(() {
+                            _isDarkMode = false;
+                          });
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: _ThemeOption(
+                        icon: Icons.dark_mode,
+                        label: l10n.dark,
+                        isSelected: _isDarkMode,
+                        onTap: () {
+                          HapticFeedback.lightImpact();
+                          setState(() {
+                            _isDarkMode = true;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
@@ -563,7 +581,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                   shadowColor: AppColors.gold.withOpacity(0.5),
                 ),
                 child: Text(
-                  _currentStep == 2 ? l10n.continueButton : 'Next',
+                  _currentStep == 2 ? l10n.continueButton : l10n.next,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
