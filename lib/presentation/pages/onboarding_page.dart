@@ -104,12 +104,15 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   void _updateContinueButton() {
     setState(() {
-      // Allow continue on step 2 (theme selection) regardless of previous selections
-      // On steps 0 and 1, require language and reciter selection
-      if (_currentStep == 2) {
-        _canContinue = true;
-      } else {
+      // Step 0: Only require language selection
+      // Step 1: Require both language and reciter selection
+      // Step 2: Always allow continue (theme selection)
+      if (_currentStep == 0) {
+        _canContinue = _selectedLanguage != null;
+      } else if (_currentStep == 1) {
         _canContinue = _selectedLanguage != null && _selectedReciter != null;
+      } else if (_currentStep == 2) {
+        _canContinue = true;
       }
     });
   }
